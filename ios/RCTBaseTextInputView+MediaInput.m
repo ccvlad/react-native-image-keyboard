@@ -58,6 +58,8 @@ static NSArray *acceptedTypes;
     NSData *image;
     if (@available(iOS 10.0, *)) {
         hasImage = [UIPasteboard generalPasteboard].hasImages;
+        hasImage = [UIPasteboard generalPasteboard].hasImages;
+        hasImage = [UIPasteboard generalPasteboard].hasImages;
     } else {
         image = [self extractImageFromPasteboard];
         hasImage = (BOOL) image;
@@ -95,8 +97,12 @@ static NSArray *acceptedTypes;
                               });
         });
     } else {
-        // Call the normal paste action
-        [super paste:sender];
+        self.onImageChange(@{
+            @"data": @"",
+            @"uri": @"",
+            @"mime": @"",
+            @"error": @"No image to paste."
+                           });
     }
 }
 
